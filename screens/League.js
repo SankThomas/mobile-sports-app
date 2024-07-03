@@ -39,18 +39,27 @@ export default function League({ route, navigation }) {
         <ActivityIndicator size="large" />
       ) : (
         <View className="flex-row flex-wrap justify-between gap-4">
-          {teams.map((team) => (
-            <TouchableOpacity
-              key={team.idTeam}
-              onPress={() => navigation.navigate("Team", team)}
-              className="w-[155px] bg-neutral-800 p-2 rounded-lg"
-            >
-              <Image source={{ uri: team.strBadge }} className="w-full h-36" />
-              <Text className="text-center text-white font-semibold mt-2">
-                {team.strTeam}
-              </Text>
-            </TouchableOpacity>
-          ))}
+          {teams ? (
+            teams.map((team) => (
+              <TouchableOpacity
+                key={team.idTeam}
+                onPress={() => navigation.navigate("Team", team)}
+                className="w-[155px] bg-neutral-800 p-2 rounded-lg"
+              >
+                <Image
+                  source={{ uri: team.strBadge }}
+                  className="w-full h-36"
+                />
+                <Text className="text-center text-white font-semibold mt-2">
+                  {team.strTeam}
+                </Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text className="text-neutral-400 text-center">
+              There are no teams in this league
+            </Text>
+          )}
         </View>
       )}
     </Container>
